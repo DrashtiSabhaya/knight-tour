@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useMemo, useState } from "react";
+import "./App.css";
+import { calculateTourPosibilities } from "./utils/helper";
+import ChessBoard from "./components/ChessBoard/ChessBoard";
+import { KnightPosition } from "./constants/types";
+import AllowedPosition from "./components/ChessBoard/AllowedPosition";
 
-function App() {
+const App = () => {
+  const [positionValue, setPositionValue] = useState<KnightPosition>({
+    row: "",
+    col: "",
+  });
+  const possibleMoves: number[][] = useMemo(
+    () => calculateTourPosibilities(positionValue),
+    [positionValue]
+  );
+
+  const setInputValues = (position: string, value: string) => {
+    if (value.length > 1 || parseInt(value) > 8) return;
+    setPositionValue({ ...positionValue, [position]: value });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="input-container">
+        <label>Enter Values</label>
+        <input
+          type="number"
+          value={positionValue.row}
+          onChange={(e) => setInputValues("row", e.target.value)}
+          max={8}
+          min={1}
+          maxLength={1}
+          pattern="([^0-8])\w{0}"
+          placeholder="Row"
+        />
+        <input
+          type="number"
+          value={positionValue.col}
+          onChange={(e) => setInputValues("col", e.target.value)}
+          max={8}
+          min={1}
+          maxLength={1}
+          pattern="([^0-8])\w{0}"
+          placeholder="Column"
+        />
+      </div>
+      <ChessBoard knightPosition={positionValue} />
+      <AllowedPosition possibleMoves={possibleMoves} />
     </div>
   );
-}
+};
 
 export default App;

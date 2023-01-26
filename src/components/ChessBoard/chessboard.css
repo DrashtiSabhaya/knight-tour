@@ -1,0 +1,46 @@
+.board {
+  height: 80vh;
+  width: 80vh;
+  background: grey;
+}
+
+.cell {
+  height: 10vh;
+  width: 10vh;
+  border: 1.5px solid grey;
+  border-style: inset;
+  font-size: 10px;
+  vertical-align: top;
+  text-align: end;
+}
+
+.blackcell {
+  background-color: black;
+  color: white;
+}
+
+.whitecell {
+  background-color: white;
+  color: black;
+}
+
+.knight {
+  font-size: 8vh;
+  text-align: center;
+  vertical-align: top;
+  height: 0;
+  width: 0;
+  position: relative;
+  left: 2vh;
+  top: -2vh;
+}
+
+.move-allowed {
+  background: green;
+  height: 2vh;
+  width: 2vh;
+  border-radius: 50%;
+  position: relative;
+  left: 4vh;
+  top: 2vh;
+}
