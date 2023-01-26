@@ -4,12 +4,12 @@ interface Props {
   possibleMoves: number[][];
 }
 
-const AllowedPosition = ({ possibleMoves }: Props) => {
+const AllowedPosition: React.FC<Props> = ({ possibleMoves }) => {
   useEffect(() => {
     return () => {
       possibleMoves.map((move: number[]) => {
         const element = document.getElementById(`${move[0]}${move[1]}`);
-        element?.classList.remove("move-allowed");
+        return element?.classList.remove("move-allowed");
       });
     };
   }, [possibleMoves]);

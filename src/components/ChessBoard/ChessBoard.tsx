@@ -6,7 +6,7 @@ interface Props {
   knightPosition: KnightPosition;
 }
 
-const ChessBoard = ({ knightPosition }: Props) => {
+const ChessBoard: React.FC<Props> = ({ knightPosition }) => {
   return (
     <table className="board">
       <tbody>
